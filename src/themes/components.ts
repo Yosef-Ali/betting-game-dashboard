@@ -7,9 +7,18 @@ export const components: Components<Theme> = {
       disableRipple: true, // This line will remove the disableRipple effect
     },
   },
+  // MuiListItemButton: {
+  //   styleOverrides: {
+  //     root: {
+  //       "&.Mui-selected": {
+  //         backgroundColor: "#141414",
+  //       },
+  //     },
+  //   },
+  // },
   MuiPaper: {
     defaultProps: {
-      elevation: 0,
+      elevation: 1,
     },
   },
   MuiButton: {
@@ -25,7 +34,7 @@ export const components: Components<Theme> = {
   },
   MuiAppBar: {
     defaultProps: {
-      elevation: 0,
+      elevation: 3,
       color: "default",
     },
   },
@@ -36,4 +45,11 @@ export const components: Components<Theme> = {
       },
     },
   },
+  // MuiCard: {
+  //   styleOverrides: {
+  //     root: {
+  //       boxShadow: "none",
+  //     },
+  //   },
+  // },
 };

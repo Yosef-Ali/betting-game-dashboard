@@ -105,7 +105,7 @@ export const ShowButton: React.FC<ShowButtonProps> = ({
         startIcon={!hideText && <VisibilityOutlined {...svgIconProps} />}
         title={disabledTitle()}
         sx={{ minWidth: 0, ...sx }}
-        className={RefineButtonClassNames.ShowButton}
+        //className={RefineButtonClassNames.ShowButton}
         {...restProps}
       >
         {hideText ? (

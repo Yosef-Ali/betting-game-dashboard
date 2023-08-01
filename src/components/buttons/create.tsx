@@ -96,7 +96,7 @@ export const CreateButton: React.FC<CreateButtonProps> = ({
         title={disabledTitle()}
         variant="contained"
         sx={{ minWidth: 0, ...sx }}
-        className={RefineButtonClassNames.CreateButton}
+        //className={RefineButtonClassNames.CreateButton}
         {...restProps}
       >
         {hideText ? (

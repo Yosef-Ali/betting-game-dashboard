@@ -1,13 +1,12 @@
 import { Refine } from "@refinedev/core";
-import { CssBaseline, GlobalStyles, ThemeProvider } from "@mui/material";
+import { Avatar, CssBaseline, GlobalStyles } from "@mui/material";
 import { RefineKbar, RefineKbarProvider } from "@refinedev/kbar";
 
 import {
   ErrorComponent,
   notificationProvider,
   RefineSnackbarProvider,
-  ThemedLayoutV2,
-  ThemedTitleV2,
+
   RefineThemes,
 } from "@refinedev/mui";
 
@@ -33,6 +32,11 @@ import {
   CategoryList,
   CategoryShow,
 } from "./pages/categories";
+import { AccountCircleOutlined, CasinoOutlined, ChromeReaderMode, Dashboard, LeaderboardOutlined, SportsHandballOutlined, StarBorderOutlined } from "@mui/icons-material";
+import { DashboardPage } from "./pages/dashboard";
+import { ThemedLayoutV2 } from "./components/themedLayout";
+import { ThemedSiderV2 } from "./components/themedLayout/sider";
+import { ThemedTitleV2 } from "./components/themedLayout/title";
 
 function App() {
   const { t, i18n } = useTranslation();
@@ -57,25 +61,75 @@ function App() {
               routerProvider={routerBindings}
               resources={[
                 {
-                  name: "blog_posts",
-                  list: "/blog-posts",
-                  create: "/blog-posts/create",
-                  edit: "/blog-posts/edit/:id",
-                  show: "/blog-posts/show/:id",
+                  name: "dashboard",
+                  list: "/",
                   meta: {
-                    canDelete: true,
+                    label: "Dashboard",
+                    icon: <Dashboard color="secondary" />,
+                    description: "Welcome to your dashboard",
                   },
                 },
                 {
-                  name: "categories",
-                  list: "/categories",
-                  create: "/categories/create",
-                  edit: "/categories/edit/:id",
-                  show: "/categories/show/:id",
+                  name: "recent_bets",
+                  list: "/recent_bets",
+                  show: "/recent_bets/:id",
                   meta: {
-                    canDelete: true,
+                    label: "Recent Bet",
+                    icon: <CasinoOutlined color="secondary" />,
+                    description: "Recent Bet Description",
                   },
                 },
+
+                {
+                  name: "active_bets",
+                  list: "/active_bets",
+                  show: "/active_bets/:id",
+                  meta: {
+                    label: "Active Bet",
+                    icon: <SportsHandballOutlined color="secondary" />,
+                    description: "Active Bet currently played",
+                  },
+                },
+                {
+                  name: "top_games",
+                  list: "/top_games",
+                  show: "/top_games/:id",
+                  meta: {
+                    label: "Top Game",
+                    icon: <LeaderboardOutlined color="secondary" />,
+                    description: "List of top games ",
+                  },
+                },
+                {
+                  name: "account_summary",
+                  list: "/account_summary",
+                  show: "/account_summary/:id",
+                  meta: {
+                    label: "Account Summary",
+                    icon: <ChromeReaderMode color="secondary" />,
+                    description: "Your account summary info here",
+                  },
+                },
+                // {
+                //   name: "blog_posts",
+                //   list: "/blog-posts",
+                //   create: "/blog-posts/create",
+                //   edit: "/blog-posts/edit/:id",
+                //   show: "/blog-posts/show/:id",
+                //   meta: {
+                //     canDelete: true,
+                //   },
+                // },
+                // {
+                //   name: "categories",
+                //   list: "/categories",
+                //   create: "/categories/create",
+                //   edit: "/categories/edit/:id",
+                //   show: "/categories/show/:id",
+                //   meta: {
+                //     canDelete: true,
+                //   },
+                // },
               ]}
               options={{
                 syncWithLocation: true,
@@ -87,11 +141,12 @@ function App() {
                   element={
                     <ThemedLayoutV2
                       Header={() => <Header sticky />}
+                      Sider={() => <ThemedSiderV2 />}
                       Title={({ collapsed }) => (
                         <ThemedTitleV2
                           collapsed={collapsed}
-                          text="refine Project"
-                          icon={<AppIcon />}
+                          text="John Doe"
+                          icon={<Avatar />}
                         />
                       )}
                     >
@@ -99,10 +154,30 @@ function App() {
                     </ThemedLayoutV2>
                   }
                 >
-                  <Route
+                  <Route index element={<DashboardPage />} />
+                  {/* <Route
                     index
                     element={<NavigateToResource resource="blog_posts" />}
-                  />
+                  /> */}
+                  <Route path="/recent_bets">
+                    <Route index element={"RecentBets"} />
+                    <Route path="show/:id" element={""} />
+                  </Route>
+                  <Route path="/active_bets">
+                    <Route index element={"ActiveBets"} />
+                    <Route path="show/:id" element={""} />
+                  </Route>
+                  <Route path="/top_games">
+                    <Route index element={"TopGames"} />
+                    <Route path="show/:id" element={""} />
+                  </Route>
+                  <Route path="/account_summary">
+                    <Route index element={"AccountSummary"} />
+                    <Route path="show/:id" element={""} />
+                  </Route>
+
+
+
                   <Route path="/blog-posts">
                     <Route index element={<BlogPostList />} />
                     <Route path="create" element={<BlogPostCreate />} />

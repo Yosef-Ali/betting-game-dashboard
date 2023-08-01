@@ -7,8 +7,8 @@ import {
   useRouterType,
   useIsAuthenticated,
   useActiveAuthProvider,
+  GoConfig,
 } from "@refinedev/core";
-import { GoConfig } from "src/interfaces";
 
 /**
  * This hook is used to avoid React's invalid setState call warning.
@@ -182,9 +182,8 @@ export function Authenticated({
       /**
        * Current pathname to append to the redirect url.
        */
-      const pathname = `${
-        isLegacyRouter ? legacyLocation?.pathname : parsed.pathname
-      }`.replace(/(\?.*|#.*)$/, "");
+      const pathname = `${isLegacyRouter ? legacyLocation?.pathname : parsed.pathname
+        }`.replace(/(\?.*|#.*)$/, "");
 
       /**
        * Redirect url to use, if `redirectOnFail` is set to a string,
@@ -195,8 +194,8 @@ export function Authenticated({
           ? redirectOnFail
           : "/login"
         : typeof redirectOnFail === "string"
-        ? redirectOnFail
-        : (authenticatedRedirect as string | undefined);
+          ? redirectOnFail
+          : (authenticatedRedirect as string | undefined);
 
       /**
        * Redirect if `appliedRedirect` is set.
@@ -212,14 +211,14 @@ export function Authenticated({
             to: appliedRedirect,
             query: appendCurrentPathToQuery
               ? {
-                  to: parsed.params?.to
-                    ? parsed.params.to
-                    : go({
-                        to: pathname,
-                        options: { keepQuery: true },
-                        type: "path",
-                      }),
-                }
+                to: parsed.params?.to
+                  ? parsed.params.to
+                  : go({
+                    to: pathname,
+                    options: { keepQuery: true },
+                    type: "path",
+                  }),
+              }
               : undefined,
             type: "replace",
           });

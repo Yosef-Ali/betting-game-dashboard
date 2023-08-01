@@ -4,6 +4,7 @@ import { ThemedHeaderV2 as DefaultHeader } from "./header";
 import { ThemedSiderV2 as DefaultSider } from "./sider";
 import Box from "@mui/material/Box";
 import type { RefineThemedLayoutV2Props } from "@refinedev/mui";
+import { Container } from "@mui/material";
 
 export const ThemedLayoutV2: React.FC<RefineThemedLayoutV2Props> = ({
   Sider,
@@ -30,16 +31,23 @@ export const ThemedLayoutV2: React.FC<RefineThemedLayoutV2Props> = ({
           }}
         >
           <HeaderToRender />
+          {/* <Container sx={{
+            paddingTop: "20px",
+            // maxWidth: '1400px',
+          }}
+          > */}
           <Box
             component="main"
             sx={{
-              p: { xs: 1, md: 2, lg: 3 },
+              p: { xs: 2, md: 4, lg: 8 },
               flexGrow: 1,
               bgcolor: (theme) => theme.palette.background.default,
+
             }}
           >
             {children}
           </Box>
+          {/* </Container> */}
           {Footer && <Footer />}
         </Box>
         {OffLayoutArea && <OffLayoutArea />}

@@ -16,9 +16,10 @@ import {
   useWarnAboutChange,
 } from "@refinedev/core";
 import {
-  ThemedTitleV2 as DefaultTitle,
+
   useThemedLayoutContext,
 } from "@refinedev/mui";
+import { ThemedTitleV2 as DefaultTitle } from "./title"
 import ChevronLeft from "@mui/icons-material/ChevronLeft";
 import Dashboard from "@mui/icons-material/Dashboard";
 import ExpandLess from "@mui/icons-material/ExpandLess";
@@ -36,6 +37,7 @@ import ListItemText from "@mui/material/ListItemText";
 import Paper from "@mui/material/Paper";
 import Tooltip from "@mui/material/Tooltip";
 import type { RefineThemedLayoutV2SiderProps } from "@refinedev/mui";
+import { useTheme } from "@mui/material";
 
 export const ThemedSiderV2: React.FC<RefineThemedLayoutV2SiderProps> = ({
   Title: TitleFromProps,
@@ -86,6 +88,7 @@ export const ThemedSiderV2: React.FC<RefineThemedLayoutV2SiderProps> = ({
     });
   }, [defaultOpenKeys]);
 
+
   const RenderToTitle = TitleFromProps ?? TitleFromContext ?? DefaultTitle;
 
   const handleClick = (key: string) => {
@@ -93,6 +96,10 @@ export const ThemedSiderV2: React.FC<RefineThemedLayoutV2SiderProps> = ({
   };
 
   const renderTreeView = (tree: ITreeMenu[], selectedKey?: string) => {
+    const theme = useTheme();
+
+    console.log('theme', theme.palette.secondary.contrastText)
+
     return tree.map((item: ITreeMenu) => {
       const { icon, label, route, name, children, parentName, meta, options } =
         item;
@@ -137,6 +144,7 @@ export const ThemedSiderV2: React.FC<RefineThemedLayoutV2SiderProps> = ({
                     justifyContent: "center",
                     marginTop: "8px",
                     px: siderCollapsed ? "0px" : "12px",
+
                   }}
                 >
                   <ListItemIcon
@@ -155,6 +163,7 @@ export const ThemedSiderV2: React.FC<RefineThemedLayoutV2SiderProps> = ({
                     primaryTypographyProps={{
                       noWrap: true,
                       fontSize: "14px",
+
                     }}
                   />
                   {isOpen ? (
@@ -212,7 +221,7 @@ export const ThemedSiderV2: React.FC<RefineThemedLayoutV2SiderProps> = ({
                 pl: isNested ? 4 : 2,
                 py: isNested ? 1.25 : 1,
                 justifyContent: "center",
-                color: isSelected ? "primary.main" : "text.primary",
+                color: isSelected ? "" : "text.primary"
               }}
             >
               <ListItemIcon
@@ -231,6 +240,7 @@ export const ThemedSiderV2: React.FC<RefineThemedLayoutV2SiderProps> = ({
                 primaryTypographyProps={{
                   noWrap: true,
                   fontSize: "14px",
+                  color: isSelected ? `${theme.palette.secondary.main}` : "text.primary",
                 }}
               />
             </ListItemButton>
@@ -435,6 +445,7 @@ export const ThemedSiderV2: React.FC<RefineThemedLayoutV2SiderProps> = ({
               width: drawerWidth(),
               overflow: "hidden",
               transition: "width 200ms cubic-bezier(0.4, 0, 0.6, 1) 0ms",
+
             },
           }}
           open

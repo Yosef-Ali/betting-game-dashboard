@@ -50,7 +50,7 @@ export const CategoryList: React.FC<IResourceComponentsProps> = () => {
 
   return (
     <List>
-      <DataGrid {...dataGridProps} columns={columns} autoHeight />
+      {/* <DataGrid {...dataGridProps} columns={columns} autoHeight /> */}
     </List>
   );
 };

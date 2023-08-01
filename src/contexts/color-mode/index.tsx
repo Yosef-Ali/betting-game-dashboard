@@ -1,17 +1,9 @@
 // Import the `ThemeProvider` component from "@mui/material/styles".
-import { ThemeProvider } from "@mui/material/styles";
+// import { ThemeProvider, createTheme, Theme } from "@mui/material/styles";
+import { createContext, PropsWithChildren, useEffect, useMemo, useState } from "react";
 
-// Import the `ThemeVariantsProps` and `theme` functions from "../../themes".
-import { ThemeVariantsProps, theme } from "../../themes";
-
-// Import the `createContext`, `PropsWithChildren`, `useEffect`, `useMemo`, and `useState` functions from "react".
-import React, {
-  createContext,
-  PropsWithChildren,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
+import { createTheme, ThemeProvider } from "@mui/material";
+import { themeSettings } from "../../themes/themeSettings";
 
 // Define the `ColorModeContextType` interface.
 type ColorModeContextType = {
@@ -38,17 +30,15 @@ export const ColorModeContextProvider: React.FC<PropsWithChildren> = ({
 
   // Set the initial color mode to the system preference or the value from localStorage.
   const systemPreference = isSystemPreferenceDark ? "dark" : "light";
-  const [mode, setMode] = useState(
-    colorModeFromLocalStorage || systemPreference,
-  );
-
-  // Set the initial theme mode to light.
-  const [themeMode, setThemeMode] = useState<ThemeVariantsProps>(
-    ThemeVariantsProps.light
+  // const [mode, setMode] = useState(
+  //   colorModeFromLocalStorage || systemPreference,
+  // );
+  const [mode, setMode] = useState<"light" | "dark">(
+    (colorModeFromLocalStorage || systemPreference) as "light" | "dark"
   );
 
   // UseMemo to memoize the theme function.
-  const activeTheme = useMemo(() => theme(themeMode), [themeMode]);
+  const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
 
   // UseEffect to set the color mode in localStorage when it changes.
   useEffect(() => {
@@ -59,10 +49,8 @@ export const ColorModeContextProvider: React.FC<PropsWithChildren> = ({
   const setColorMode = () => {
     if (mode === "light") {
       setMode("dark");
-      setThemeMode(ThemeVariantsProps.dark)
     } else {
       setMode("light");
-      setThemeMode(ThemeVariantsProps.light)
     }
   };
 
@@ -76,7 +64,7 @@ export const ColorModeContextProvider: React.FC<PropsWithChildren> = ({
     >
       <ThemeProvider
         // you can change the theme colors here. example: mode === "light" ? RefineThemes.Magenta : RefineThemes.MagentaDark
-        theme={activeTheme}
+        theme={theme}
       >
         {children}
       </ThemeProvider>

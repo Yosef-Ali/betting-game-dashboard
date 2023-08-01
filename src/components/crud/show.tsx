@@ -93,40 +93,40 @@ export const Show: React.FC<ShowProps> = ({
 
   const listButtonProps: ListButtonProps | undefined = hasList
     ? {
-        ...(isLoading ? { disabled: true } : {}),
-        resource:
-          routerType === "legacy"
-            ? resource?.route
-            : resource?.identifier ?? resource?.name,
-      }
+      ...(isLoading ? { disabled: true } : {}),
+      resource:
+        routerType === "legacy"
+          ? resource?.route
+          : resource?.identifier ?? resource?.name,
+    }
     : undefined;
   const editButtonProps: EditButtonProps | undefined = isEditButtonVisible
     ? {
-        ...(isLoading ? { disabled: true } : {}),
-        resource:
-          routerType === "legacy"
-            ? resource?.route
-            : resource?.identifier ?? resource?.name,
-        recordItemId: id,
-      }
+      ...(isLoading ? { disabled: true } : {}),
+      resource:
+        routerType === "legacy"
+          ? resource?.route
+          : resource?.identifier ?? resource?.name,
+      recordItemId: id,
+    }
     : undefined;
   const deleteButtonProps: DeleteButtonProps | undefined = isDeleteButtonVisible
     ? {
-        ...(isLoading ? { disabled: true } : {}),
-        resource:
-          routerType === "legacy"
-            ? resource?.route
-            : resource?.identifier ?? resource?.name,
-        recordItemId: id,
-        onSuccess: () => {
-          if (routerType === "legacy") {
-            legacyGoList(resource?.route ?? resource?.name ?? "");
-          } else {
-            go({ to: goListPath });
-          }
-        },
-        dataProviderName,
-      }
+      ...(isLoading ? { disabled: true } : {}),
+      resource:
+        routerType === "legacy"
+          ? resource?.route
+          : resource?.identifier ?? resource?.name,
+      recordItemId: id,
+      onSuccess: () => {
+        if (routerType === "legacy") {
+          legacyGoList(resource?.route ?? resource?.name ?? "");
+        } else {
+          go({ to: goListPath });
+        }
+      },
+      dataProviderName,
+    }
     : undefined;
   const refreshButtonProps: RefreshButtonProps = {
     ...(isLoading ? { disabled: true } : {}),
@@ -156,15 +156,15 @@ export const Show: React.FC<ShowProps> = ({
           title ?? (
             <Typography
               variant="h5"
-              className={RefinePageHeaderClassNames.Title}
+            //className={RefinePageHeaderClassNames.Title}
             >
               {translate(
                 `${resource?.name}.titles.show`,
                 `Show ${userFriendlyResourceName(
                   resource?.meta?.label ??
-                    resource?.options?.label ??
-                    resource?.label ??
-                    resource?.name,
+                  resource?.options?.label ??
+                  resource?.label ??
+                  resource?.name,
                   "singular"
                 )}`
               )}
@@ -193,12 +193,12 @@ export const Show: React.FC<ShowProps> = ({
             {headerButtons
               ? typeof headerButtons === "function"
                 ? headerButtons({
-                    defaultButtons: defaultHeaderButtons,
-                    deleteButtonProps,
-                    editButtonProps,
-                    listButtonProps,
-                    refreshButtonProps,
-                  })
+                  defaultButtons: defaultHeaderButtons,
+                  deleteButtonProps,
+                  editButtonProps,
+                  listButtonProps,
+                  refreshButtonProps,
+                })
                 : headerButtons
               : defaultHeaderButtons}
           </Box>

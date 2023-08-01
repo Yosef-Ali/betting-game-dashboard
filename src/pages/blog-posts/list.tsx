@@ -110,7 +110,7 @@ export const BlogPostList: React.FC<IResourceComponentsProps> = () => {
 
   return (
     <List>
-      <DataGrid {...dataGridProps} columns={columns} autoHeight />
+      {/* <DataGrid {...dataGridProps} columns={columns} autoHeight /> */}
     </List>
   );
 };

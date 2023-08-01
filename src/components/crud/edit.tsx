@@ -98,12 +98,12 @@ export const Edit: React.FC<EditProps> = ({
 
   const listButtonProps: ListButtonProps | undefined = hasList
     ? {
-        ...(isLoading ? { disabled: true } : {}),
-        resource:
-          routerType === "legacy"
-            ? resource?.route
-            : resource?.identifier ?? resource?.name,
-      }
+      ...(isLoading ? { disabled: true } : {}),
+      resource:
+        routerType === "legacy"
+          ? resource?.route
+          : resource?.identifier ?? resource?.name,
+    }
     : undefined;
 
   const refreshButtonProps: RefreshButtonProps = {
@@ -125,24 +125,24 @@ export const Edit: React.FC<EditProps> = ({
 
   const deleteButtonProps: DeleteButtonProps | undefined = isDeleteButtonVisible
     ? ({
-        ...(isLoading ? { disabled: true } : {}),
-        resource:
-          routerType === "legacy"
-            ? resource?.route
-            : resource?.identifier ?? resource?.name,
-        mutationMode,
-        variant: "outlined",
-        onSuccess: () => {
-          if (routerType === "legacy") {
-            legacyGoList(resource?.route ?? resource?.name ?? "");
-          } else {
-            go({ to: goListPath });
-          }
-        },
-        recordItemId: id,
-        dataProviderName,
-        ...deleteButtonPropsFromProps,
-      } as const)
+      ...(isLoading ? { disabled: true } : {}),
+      resource:
+        routerType === "legacy"
+          ? resource?.route
+          : resource?.identifier ?? resource?.name,
+      mutationMode,
+      variant: "outlined",
+      onSuccess: () => {
+        if (routerType === "legacy") {
+          legacyGoList(resource?.route ?? resource?.name ?? "");
+        } else {
+          go({ to: goListPath });
+        }
+      },
+      recordItemId: id,
+      dataProviderName,
+      ...deleteButtonPropsFromProps,
+    } as const)
     : undefined;
 
   const saveButtonProps: SaveButtonProps = {
@@ -166,15 +166,15 @@ export const Edit: React.FC<EditProps> = ({
           title ?? (
             <Typography
               variant="h5"
-              className={RefinePageHeaderClassNames.Title}
+            //className={RefinePageHeaderClassNames.Title}
             >
               {translate(
                 `${resource?.name}.titles.edit`,
                 `Edit ${userFriendlyResourceName(
                   resource?.meta?.label ??
-                    resource?.options?.label ??
-                    resource?.label ??
-                    resource?.name,
+                  resource?.options?.label ??
+                  resource?.label ??
+                  resource?.name,
                   "singular"
                 )}`
               )}
@@ -203,10 +203,10 @@ export const Edit: React.FC<EditProps> = ({
             {headerButtons
               ? typeof headerButtons === "function"
                 ? headerButtons({
-                    defaultButtons: defaultHeaderButtons,
-                    listButtonProps,
-                    refreshButtonProps,
-                  })
+                  defaultButtons: defaultHeaderButtons,
+                  listButtonProps,
+                  refreshButtonProps,
+                })
                 : headerButtons
               : defaultHeaderButtons}
           </Box>
@@ -226,10 +226,10 @@ export const Edit: React.FC<EditProps> = ({
         {footerButtons
           ? typeof footerButtons === "function"
             ? footerButtons({
-                defaultButtons: defaultFooterButtons,
-                deleteButtonProps,
-                saveButtonProps,
-              })
+              defaultButtons: defaultFooterButtons,
+              deleteButtonProps,
+              saveButtonProps,
+            })
             : footerButtons
           : defaultFooterButtons}
       </CardActions>

@@ -4,8 +4,9 @@ import MuiLink from "@mui/material/Link";
 import SvgIcon from "@mui/material/SvgIcon";
 import Typography from "@mui/material/Typography";
 import type { RefineLayoutThemedTitleProps } from "@refinedev/mui";
+import { Avatar } from "@mui/material";
 
-const defaultText = "refine Project";
+const defaultText = "John Doe";
 
 const defaultIcon = (
   <svg
@@ -41,6 +42,8 @@ export const ThemedTitleV2: React.FC<RefineLayoutThemedTitleProps> = ({
 
   const ActiveLink = routerType === "legacy" ? LegacyLink : Link;
 
+  console.log('title', text)
+
   return (
     <MuiLink
       to="/"
@@ -53,9 +56,10 @@ export const ThemedTitleV2: React.FC<RefineLayoutThemedTitleProps> = ({
         ...wrapperStyles,
       }}
     >
-      <SvgIcon height="24px" width="24px" color="primary">
+      {/* <SvgIcon height="24px" width="24px" color="primary">
         {icon}
-      </SvgIcon>
+      </SvgIcon> */}
+      <Avatar />
       {!collapsed && (
         <Typography
           variant="h6"
